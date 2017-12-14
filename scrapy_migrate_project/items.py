@@ -96,6 +96,7 @@ class crawler114(scrapy.Item):
     release_reason = scrapy.Field()
     release_date = scrapy.Field()
     spider_name = scrapy.Field()
+    notice_id = scrapy.Field()
 
 
 class crawler114_out(scrapy.Item):
