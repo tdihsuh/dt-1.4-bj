@@ -140,7 +140,7 @@ class crawler116(scrapy.Item):
     source_url = scrapy.Field()
     source_page = scrapy.Field()
     spider_name = scrapy.Field()
-    notice_id = scrapy.Field()
+
 
 
 
