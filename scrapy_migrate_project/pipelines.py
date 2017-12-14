@@ -107,9 +107,9 @@ class ScrapyMigrateProjectPipeline(object):
     def process_item(self, item, spider):
 
         if isinstance(item, crawler114):
-            self.producer_oe.produce(str(dict(item)))
-            # content = json.dumps(dict(item), ensure_ascii=False)
-            # self.producer_oe.produce(str(content))
+            # self.producer_oe.produce(str(dict(item)))
+            content = json.dumps(dict(item), ensure_ascii=False)
+            self.producer_oe.produce(str(content))
         elif isinstance(item, CustomsItem):
             content = json.dumps(dict(item), ensure_ascii=False)
             self.producer_cu.produce(str(content))
