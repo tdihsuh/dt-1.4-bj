@@ -9,19 +9,41 @@ from pykafka import KafkaClient
 
 from scrapy.exceptions import DropItem
 
-from scrapy_migrate_project import settings
-from scrapy_migrate_project.items import TourismItem, crawler116, CustomsItem, crawler007, crawler114_out
+from scrapy_migrate_project.items import TourismItem, crawler116, CustomsItem, crawler007, crawler114_out, crawler005
 
 import redis
 
 from scrapy_migrate_project.items import crawler114
+import sys
+
+reload(sys)
+sys.setdefaultencoding('utf-8')
 
 redis_db = redis.Redis(host='10.3.10.33', port=6379, db=0, password=None)
 redis_data_dict = "scrapy_test"
 
+
 class ScrapyMigrateProjectPipeline(object):
 
-    def __init__(self,producer):
+    def __init__(self, producer):
+        # def __init__(self):
+
+        # self.file_tourism = open('tourism.json', 'wb')
+        # self.file_customs = open('customs.json', 'wb')
+        # self.file_C116a11Item = open('C116a11Item.json', 'wb')
+        # self.file_crawler114_1 = open('crawler114_1.json', 'wb')
+        # self.file_crawler114_3_out = open('crawler114_3_out.json', 'wb')
+        # self.file_crawler114_5 = open('crawler114_5.json', 'wb')
+        # self.file_crawler114_5_out = open('crawler114_5_out.json', 'wb')
+        # self.file_crawler114_6 = open('crawler114_6.json', 'wb')
+        # self.file_crawler114_6_out = open('crawler114_6_out.json', 'wb')
+        # self.file_crawler114_7 = open('crawler114_7.json', 'wb')
+        # self.file_crawler114_7_out = open('crawler114_7_out.json', 'wb')
+        # self.file_crawler114_8 = open('crawler114_8.json', 'wb')
+        # self.file_crawler114_8_out = open('crawler114_8_out.json', 'wb')
+        # self.file_crawler116_1 = open('crawler116_1.json', 'wb')
+        # self.file_crawler116_4 = open('crawler116_4.json', 'wb')
+        # self.file_crawler116_6 = open('crawler116_6.json', 'wb')
         self.producer_cm = producer[0]
         self.producer_oe = producer[1]
         self.producer_gp = producer[2]
@@ -39,11 +61,10 @@ class ScrapyMigrateProjectPipeline(object):
         self.producer_cs = producer[14]
         self.producer_sb = producer[15]
         self.producer_ci = producer[16]
-
-
+        self.producer_cd = producer[17]
 
     @classmethod
-    def from_settings(cls,settings):
+    def from_settings(cls, settings):
         list_class = []
         host = settings['KAFKA_HOST']
         client = KafkaClient(host)
@@ -64,6 +85,7 @@ class ScrapyMigrateProjectPipeline(object):
         topic_cs = client.topics['tag_cs']
         topic_sb = client.topics['tag_sb']
         topic_ci = client.topics['tag_ci']
+        topic_cd = client.topics['tag_cd']
         producer_cm = topic_cm.get_producer()
         producer_oe = topic_oe.get_producer()
         producer_gp = topic_gp.get_producer()
@@ -81,6 +103,7 @@ class ScrapyMigrateProjectPipeline(object):
         producer_cs = topic_cs.get_producer()
         producer_sb = topic_sb.get_producer()
         producer_ci = topic_ci.get_producer()
+        producer_cd = topic_cd.get_producer()
 
         list_class.append(producer_cm)
         list_class.append(producer_oe)
@@ -99,36 +122,44 @@ class ScrapyMigrateProjectPipeline(object):
         list_class.append(producer_cs)
         list_class.append(producer_sb)
         list_class.append(producer_ci)
+        list_class.append(producer_cd)
 
         return cls(list_class)
 
-
-
     def process_item(self, item, spider):
-
         if isinstance(item, crawler114):
-            # self.producer_oe.produce(str(dict(item)))
-            content = json.dumps(dict(item), ensure_ascii=False)
-            self.producer_oe.produce(str(content))
+            print(item['ent_name'])
+            self.producer_oe.produce(str(item))
+
         elif isinstance(item, CustomsItem):
+            print(item['entity_name'])
             content = json.dumps(dict(item), ensure_ascii=False)
             self.producer_cu.produce(str(content))
         elif isinstance(item, TourismItem):
+            print(item['entity_name'])
             content = json.dumps(dict(item), ensure_ascii=False)
             self.producer_tr.produce(str(content))
         elif isinstance(item, crawler116):
+            print(item['entity_name'])
             self.producer_ap.produce(str(item))
         elif isinstance(item, crawler007):
+            print(item['entity_name'])
             content = json.dumps(dict(item), ensure_ascii=False)
             self.producer_gp.produce(str(content))
         elif isinstance(item, crawler114_out):
-            self.producer_oe.produce(str(dict(item)))
 
+            print(item['ent_name'])
+            self.producer_oe.produce(str(item))
+            # self.producer_oe.produce(str(item))
+        elif isinstance(item, crawler005):
+            print(item['entity_name'])
+            self.producer_cd.produce(str(item))
 
         return item
 
     def close_spider(self, spider):
         pass
+
 
 class DuplicatePipeline(object):
 
@@ -144,13 +175,119 @@ class DuplicatePipeline(object):
                 print('already exist!')
                 raise DropItem("Duplicate item found:%s" % item)
             else:
-                redis_db.hset(redis_data_dict, item['source_url'], 1)
-        elif item['spider_name'] == 'c116a11':
-            if redis_db.hexists(redis_data_dict, item['noticeid']):
+                redis_db.hset(redis_data_dict, item['source_url'], item['spider_name'])
+        elif item['spider_name'] == 'crawler114_8':
+            if redis_db.hexists(redis_data_dict, hash(item['case_no'] + item['pun_date'] + item['ent_name'])):
                 print('already exist!')
                 raise DropItem("Duplicate item found:%s" % item)
             else:
-                redis_db.hset(redis_data_dict, item['noticeid'], item['spider_name'])
+                redis_db.hset(redis_data_dict, hash(item['case_no'] + item['pun_date'] + item['ent_name']),
+                              item['spider_name'])
+        elif item['spider_name'] == 'crawler114_8_out':
+            if redis_db.hexists(redis_data_dict, hash(item['case_no'] + item['release_date'] + item['ent_name'])):
+                raise DropItem("Duplicate item found:%s" % item)
+            else:
+                redis_db.hset(redis_data_dict, hash(item['case_no'] + item['release_date'] + item['ent_name']),
+                              item['spider_name'])
+
+        elif item['spider_name'] == 'crawler114_6':
+            if redis_db.hexists(redis_data_dict, hash(item['case_no'] + item['pun_date'] + item['ent_name'])):
+                print('already exist!')
+                raise DropItem("Duplicate item found:%s" % item)
+            else:
+                redis_db.hset(redis_data_dict, hash(item['case_no'] + item['pun_date'] + item['ent_name']),
+                              item['spider_name'])
+
+        elif item['spider_name'] == 'crawler114_6_out':
+            if redis_db.hexists(redis_data_dict, hash(item['case_no'] + item['release_date'] + item['ent_name'])):
+                raise DropItem("Duplicate item found:%s" % item)
+            else:
+                redis_db.hset(redis_data_dict, hash(item['case_no'] + item['release_date'] + item['ent_name']),
+                              item['spider_name'])
+
+        elif item['spider_name'] == 'crawler114_5':
+            if redis_db.hexists(redis_data_dict, hash(item['source_url'])):
+                print('already exist!')
+                raise DropItem("Duplicate item found:%s" % item)
+            else:
+                redis_db.hset(redis_data_dict, hash(item['source_url']), item['spider_name'])
+
+        elif item['spider_name'] == 'crawler114_5_out':
+            if redis_db.hexists(redis_data_dict, hash(item['source_url'])):
+                print('already exist!')
+                raise DropItem("Duplicate item found:%s" % item)
+            else:
+                redis_db.hset(redis_data_dict, hash(item['source_url']), item['spider_name'])
+
+        elif item['spider_name'] == 'crawler114_1':
+            if redis_db.hexists(redis_data_dict, hash(item['source_url'])):
+                print('already exist!')
+                raise DropItem("Duplicate item found:%s" % item)
+            else:
+                redis_db.hset(redis_data_dict, hash(item['source_url']), item['spider_name'])
+
+        elif item['spider_name'] == 'crawler114_3':
+            if redis_db.hexists(redis_data_dict, hash(item['source_url'])):
+                print('already exist!')
+                raise DropItem("Duplicate item found:%s" % item)
+            else:
+                redis_db.hset(redis_data_dict, hash(item['source_url']), item['spider_name'])
+
+        elif item['spider_name'] == 'crawler114_3_out':
+            if redis_db.hexists(redis_data_dict, hash(item['source_url'])):
+                print('already exist!')
+                raise DropItem("Duplicate item found:%s" % item)
+            else:
+                redis_db.hset(redis_data_dict, hash(item['source_url']), item['spider_name'])
+
+        elif item['spider_name'] == 'crawler116_6':
+            if redis_db.hexists(redis_data_dict, hash(item['source_url'])):
+                print('already exist!')
+                raise DropItem("Duplicate item found:%s" % item)
+            else:
+                redis_db.hset(redis_data_dict, hash(item['source_url']), item['spider_name'])
+
+        elif item['spider_name'] == 'crawler116_1':
+            if redis_db.hexists(redis_data_dict, hash(item['source_url'])):
+                print('already exist!')
+                raise DropItem("Duplicate item found:%s" % item)
+            else:
+                redis_db.hset(redis_data_dict, hash(item['source_url']), item['spider_name'])
+
+        elif item['spider_name'] == 'crawler116_4':
+            if redis_db.hexists(redis_data_dict, hash(item['source_url'])):
+                print('already exist!')
+                raise DropItem("Duplicate item found:%s" % item)
+            else:
+                redis_db.hset(redis_data_dict, hash(item['source_url']), item['spider_name'])
+
+        elif item['spider_name'] == 'customs_spider':
+            if redis_db.hexists(redis_data_dict, hash(item['org_code'] + item['copname'] + item['creditcode'])):
+                print('already exist!')
+                raise DropItem("Duplicate item found:%s" % item)
+            else:
+                redis_db.hset(redis_data_dict, hash(item['org_code'] + item['copname'] + item['creditcode']),
+                              item['spider_name'])
+
+        elif item['spider_name'] == 'tourism_spider':
+            if redis_db.hexists(redis_data_dict, hash(item['source_url'])):
+                print('already exist!')
+                raise DropItem("Duplicate item found:%s" % item)
+            else:
+                redis_db.hset(redis_data_dict, hash(item['source_url']), item['spider_name'])
+
+        elif item['spider_name'] == 'crawler007':
+            if redis_db.hexists(redis_data_dict, hash(item['entity_name']+item['punishDate']+item['orgNum'])):
+                print('already exist!')
+                raise DropItem("Duplicate item found:%s" % item)
+            else:
+                redis_db.hset(redis_data_dict,hash(item['entity_name']+item['punishDate']+item['orgNum']), item['spider_name'])
+
+        elif item['spider_name'] == 'crawler005':
+            if redis_db.hexists(redis_data_dict, hash(item['source_url'])):
+                print('already exist!')
+                raise DropItem("Duplicate item found:%s" % item)
+            else:
+                redis_db.hset(redis_data_dict, hash(item['source_url']), item['spider_name'])
 
         return item
-
