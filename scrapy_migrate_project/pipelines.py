@@ -110,31 +110,22 @@ class ScrapyMigrateProjectPipeline(object):
 
     def process_item(self, item, spider):
         if isinstance(item, crawler114):
-            print(item['ent_name'])
             self.producer_oe.produce(str(item))
 
         elif isinstance(item, CustomsItem):
-            print(item['entity_name'])
             content = json.dumps(dict(item), ensure_ascii=False)
             self.producer_cu.produce(str(content))
         elif isinstance(item, TourismItem):
-            print(item['entity_name'])
             content = json.dumps(dict(item), ensure_ascii=False)
             self.producer_tr.produce(str(content))
         elif isinstance(item, crawler116):
-            print(item['entity_name'])
             self.producer_ap.produce(str(item))
         elif isinstance(item, crawler007):
-            print(item['entity_name'])
             content = json.dumps(dict(item), ensure_ascii=False)
             self.producer_gp.produce(str(content))
         elif isinstance(item, crawler114_out):
-
-            print(item['ent_name'])
             self.producer_oe.produce(str(item))
-            # self.producer_oe.produce(str(item))
         elif isinstance(item, crawler005):
-            print(item['entity_name'])
             self.producer_cd.produce(str(item))
 
         return item
