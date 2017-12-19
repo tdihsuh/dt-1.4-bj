@@ -26,24 +26,6 @@ redis_data_dict = "scrapy_test"
 class ScrapyMigrateProjectPipeline(object):
 
     def __init__(self, producer):
-        # def __init__(self):
-
-        # self.file_tourism = open('tourism.json', 'wb')
-        # self.file_customs = open('customs.json', 'wb')
-        # self.file_C116a11Item = open('C116a11Item.json', 'wb')
-        # self.file_crawler114_1 = open('crawler114_1.json', 'wb')
-        # self.file_crawler114_3_out = open('crawler114_3_out.json', 'wb')
-        # self.file_crawler114_5 = open('crawler114_5.json', 'wb')
-        # self.file_crawler114_5_out = open('crawler114_5_out.json', 'wb')
-        # self.file_crawler114_6 = open('crawler114_6.json', 'wb')
-        # self.file_crawler114_6_out = open('crawler114_6_out.json', 'wb')
-        # self.file_crawler114_7 = open('crawler114_7.json', 'wb')
-        # self.file_crawler114_7_out = open('crawler114_7_out.json', 'wb')
-        # self.file_crawler114_8 = open('crawler114_8.json', 'wb')
-        # self.file_crawler114_8_out = open('crawler114_8_out.json', 'wb')
-        # self.file_crawler116_1 = open('crawler116_1.json', 'wb')
-        # self.file_crawler116_4 = open('crawler116_4.json', 'wb')
-        # self.file_crawler116_6 = open('crawler116_6.json', 'wb')
         self.producer_cm = producer[0]
         self.producer_oe = producer[1]
         self.producer_gp = producer[2]
