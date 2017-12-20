@@ -22,7 +22,7 @@ class Crawler1143Spider(scrapy.Spider):
         page_str_temp = page_content[1].get_text(strip=True).encode('utf-8')
         pages_str = filter(str.isalnum, page_str_temp)
         total_pages = int(pages_str)
-        for i in range(total_pages):
+        for i in range(total_pages)[:1]:
             url = 'http://gsxt.hljaic.gov.cn/ycmlNoticeInfo.jspx?mark=01&pageNo=' + str(i) + '&order=2&title=&area='
             yield scrapy.Request(url=url)
 
@@ -30,7 +30,7 @@ class Crawler1143Spider(scrapy.Spider):
         content = response.body
         soup = BeautifulSoup(content, "lxml")
         tag_tr = soup.find_all('tr')
-        for i in range(0, len(tag_tr) - 1):
+        for i in range(0, len(tag_tr) - 1)[:3]:
             list_temp = []
             tag_a = tag_tr[i].find_all(id="A3")
             tag_td = tag_tr[i].find_all(id="A5")

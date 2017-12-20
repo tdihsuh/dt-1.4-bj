@@ -71,7 +71,7 @@ ROBOTSTXT_OBEY = False
 # See http://scrapy.readthedocs.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
    'scrapy_migrate_project.pipelines.ScrapyMigrateProjectPipeline': 300,
-   'scrapy_migrate_project.pipelines.DuplicatePipeline':200,
+   # 'scrapy_migrate_project.pipelines.DuplicatePipeline':200,
 }
 
 # Enable and configure the AutoThrottle extension (disabled by default)

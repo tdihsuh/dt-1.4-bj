@@ -143,5 +143,71 @@ class crawler116(scrapy.Item):
     spider_name = scrapy.Field()
 
 
+class C008Item(scrapy.Item):
+    # define the fields for your item here like:
+    # name = scrapy.Field()
+    tax_name = scrapy.Field()
+    tax_num = scrapy.Field()
+    org_num = scrapy.Field()
+    reg_address = scrapy.Field()
+    legal_man_name = scrapy.Field()
+    legal_man_sex = scrapy.Field()
+    legal_man_identify_num = scrapy.Field()
+    case_nature = scrapy.Field()
+    uncredit_content = scrapy.Field()
+    create_date = scrapy.Field()
+    source_page = scrapy.Field()
+    source_url = scrapy.Field()
+    spider_name = scrapy.Field()
+
+
+class C009Item(scrapy.Item):
+    credit_icon = scrapy.Field()
+    credit_recordNum = scrapy.Field()
+    credit_recordBody = scrapy.Field()
+    credit_recordBodyDetailUrl = scrapy.Field()
+    credit_recordBodyDetailSourceCode = scrapy.Field()
+    credit_recordBodyTag = scrapy.Field()
+    credit_recordBodyID = scrapy.Field()
+    credit_recordBodyGender = scrapy.Field()
+    reason = scrapy.Field()
+    result = scrapy.Field()
+    resultTag = scrapy.Field()
+    administration = scrapy.Field()
+    notice_id = scrapy.Field()
+    recordTime = scrapy.Field()
+    source_page = scrapy.Field()
+    spider_name = scrapy.Field()
+    source_url = scrapy.Field()
+
+
+class C010Item(scrapy.Item):
+    notice_id = scrapy.Field()  # 系统编码
+    filenum = scrapy.Field()
+    punishname = scrapy.Field()
+    punishtype = scrapy.Field()
+    punishreason = scrapy.Field()
+    punishaccordance = scrapy.Field()
+    personname = scrapy.Field()
+    idcard = scrapy.Field()
+    punishresult = scrapy.Field()
+    timeresult = scrapy.Field()
+    punishdepartment = scrapy.Field()
+    source_page = scrapy.Field()
+    spider_name = scrapy.Field()
+
+
+class C012Item(scrapy.Item):
+    company_name = scrapy.Field()
+    notice_id = scrapy.Field()
+    company_detail_pageUrl = scrapy.Field()
+    administration = scrapy.Field()
+    why_listed_in = scrapy.Field()
+    annals_year = scrapy.Field()
+    year_listed_in = scrapy.Field()
+    create_date = scrapy.Field()
+    source_page = scrapy.Field()
+    spider_name = scrapy.Field()
+
 
 

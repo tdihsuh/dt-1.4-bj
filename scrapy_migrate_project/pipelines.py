@@ -10,7 +10,7 @@ from pykafka import KafkaClient
 from scrapy.exceptions import DropItem
 
 from scrapy_migrate_project.items import TourismItem, crawler116, CustomsItem, crawler007, crawler114_out, crawler005
-
+from scrapy_migrate_project.items import crawler114,C008Item,C009Item,C010Item,C012Item
 import redis
 
 from scrapy_migrate_project.items import crawler114
@@ -111,6 +111,11 @@ class ScrapyMigrateProjectPipeline(object):
     def process_item(self, item, spider):
         if isinstance(item, crawler114):
             self.producer_oe.produce(str(item))
+
+        elif isinstance(item, C008Item):
+            self.producer_mt.produce(str(item))
+        elif isinstance(item, (C009Item,C010Item,C012Item,crawler116)):
+            self.producer_ap.produce(str(item))
 
         elif isinstance(item, CustomsItem):
             content = json.dumps(dict(item), ensure_ascii=False)
