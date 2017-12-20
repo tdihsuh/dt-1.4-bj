@@ -267,5 +267,27 @@ class DuplicatePipeline(object):
                 raise DropItem("Duplicate item found:%s" % item)
             else:
                 redis_db.hset(redis_data_dict, hash(item['source_url']), item['spider_name'])
+        elif item['spider_name'] in ['c009','c010','c012',
+                                   'c114a09in','c114a09out','c114a12in','c114a12out',
+                                   'c114a13in','c114a13out','c114a14in','c114a14out',
+                                   'c114a15in','c114a15out','c114a16in','c114a16out',
+                                   'c116a07','c116a09','c116a12','c116a10','c116a11']:
+
+            s= item['spider_name']+item['notice_id']
+
+            if redis_db.hexists(redis_data_dict, hash(s)):
+                # log.msg('========={} already exist!==='.format(s),level=log.DEBUG)
+                print('-------------------exists------------------')
+                raise DropItem("Duplicate item found:%s" % item)
+            else:
+                redis_db.hset(redis_data_dict,hash(s), item['spider_name'])
+        elif item['spider_name'] in ['c008','c011']:
+            s=item['spider_name']+item['source_url']
+            if redis_db.hexists(redis_data_dict, hash(s)):
+                # log.msg('========={} already exist!==='.format(s),level=log.DEBUG)
+                print('-------------------exists------------------')
+                raise DropItem("Duplicate item found:%s" % item)
+            else:
+                redis_db.hset(redis_data_dict,hash(s), item['spider_name'])
 
         return item
