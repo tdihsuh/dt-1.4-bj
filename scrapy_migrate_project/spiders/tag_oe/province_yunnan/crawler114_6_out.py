@@ -68,12 +68,13 @@ class Crawler1146OutSpider(scrapy.Spider):
         item['case_no'] = case_no
         item['release_org'] = response.meta['release_org']
         item['release_date'] = response.meta['release_date']
-        item['ent_name'] = response.meta['ent_name']
+        item['entity_name'] = response.meta['ent_name']
         item['release_reason'] = release_reason
         item['data_source'] = data_source
         item['create_date'] = create_date
         item['source_url'] = response.url
         item['source_page'] = content
         item['data_id'] = 'yunnan'
+        item['spider_name'] = self.name
 
         yield item

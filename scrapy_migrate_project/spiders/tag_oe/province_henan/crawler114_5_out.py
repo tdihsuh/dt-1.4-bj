@@ -59,7 +59,7 @@ class Crawler1145OutSpider(scrapy.Spider):
         data_id = 'henan'
         data_source = 'crawler114_5_out'
         item['release_reason'] = release_reason
-        item['ent_name'] = response.meta['ent_name']
+        item['entity_name'] = response.meta['ent_name']
         item['release_org'] = response.meta['release_org']
         item['release_date'] = response.meta['release_date']
         item['source_url'] = response.url
@@ -67,5 +67,6 @@ class Crawler1145OutSpider(scrapy.Spider):
         item['create_date'] = create_date
         item['data_id'] = data_id
         item['data_source'] = data_source
+        item['spider_name'] = self.name
 
         yield item

@@ -110,6 +110,8 @@ class Crawler1166Spider(scrapy.Spider):
         item['data_source'] = data_source
         item['source_url'] = response.url
         item['source_page'] = content
+        item['spider_name']=self.name
+
 
         yield item
 

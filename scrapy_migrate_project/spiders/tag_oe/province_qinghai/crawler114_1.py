@@ -41,11 +41,11 @@ class Crawler1141Spider(scrapy.Spider):
         pun_reason = p_tags[1].get_text(strip=True).replace(' ', '')
         create_date = time.strftime('%Y-%m-%d', time.localtime())
 
-        item['ent_name'] = response.meta['ent_name']
-        item['pun_org'] = response.meta['pun_org']
-        item['pun_date'] = response.meta['pun_date']
-        item['ent_name'] = response.meta['ent_name']
-        item['pun_reason'] = pun_reason
+        item['entity_name'] = response.meta['ent_name']
+        item['punish_org'] = response.meta['pun_org']
+        item['punish_date'] = response.meta['pun_date']
+        # item['ent_name'] = response.meta['ent_name']
+        item['punish_reason'] = pun_reason
         item['data_id'] = 'qinghai'
         item['data_source'] = 'crawler114_1'
         item['del_flag'] = '0'
@@ -53,6 +53,7 @@ class Crawler1141Spider(scrapy.Spider):
         item['create_date'] = create_date
         item['source_url'] = response.url
         item['source_page'] = content
+        item['spider_name'] = self.name
 
         yield item
 

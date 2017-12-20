@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import json
 
-from cycredit.RedisUtil import RedisUtil as redis
+# from cycredit.RedisUtil import RedisUtil as redis
 import requests
 import scrapy
 

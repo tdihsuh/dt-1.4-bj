@@ -81,10 +81,10 @@ class crawler007(scrapy.Item):
 
 class crawler114(scrapy.Item):
     case_no = scrapy.Field()
-    pun_org = scrapy.Field()
-    pun_date = scrapy.Field()
-    ent_name = scrapy.Field()
-    pun_reason = scrapy.Field()
+    punish_org = scrapy.Field()
+    punish_date = scrapy.Field()
+    entity_name = scrapy.Field()
+    punish_reason = scrapy.Field()
     data_id = scrapy.Field()
     data_source = scrapy.Field()
     del_flag = scrapy.Field()
@@ -103,7 +103,7 @@ class crawler114_out(scrapy.Item):
     case_no = scrapy.Field()
     release_org = scrapy.Field()
     release_date = scrapy.Field()
-    ent_name = scrapy.Field()
+    entity_name = scrapy.Field()
     release_reason = scrapy.Field()
     data_id = scrapy.Field()
     data_source = scrapy.Field()

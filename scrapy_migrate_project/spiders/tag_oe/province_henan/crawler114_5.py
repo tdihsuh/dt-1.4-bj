@@ -55,10 +55,10 @@ class Crawler1145Spider(scrapy.Spider):
         item = crawler114()
         pun_reason = soup.find_all(class_='Section1')[0].find_all('p')[1].get_text()
         create_date = time.strftime('%Y-%m-%d', time.localtime())
-        item['pun_reason'] = pun_reason
-        item['ent_name'] = response.meta['ent_name']
-        item['pun_org'] = response.meta['pun_org']
-        item['pun_date'] = response.meta['pun_date']
+        item['punish_reason'] = pun_reason
+        item['entity_name'] = response.meta['ent_name']
+        item['punish_org'] = response.meta['pun_org']
+        item['punish_date'] = response.meta['pun_date']
         item['source_url'] = response.url
         item['source_page'] = content
         item['create_date'] = create_date
@@ -66,6 +66,7 @@ class Crawler1145Spider(scrapy.Spider):
         item['data_source'] = 'crawler114_5'
         item['del_flag'] = '0'
         item['op_flag'] = 'a'
+        item['spider_name'] = self.name
 
         yield item
 

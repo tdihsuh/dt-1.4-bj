@@ -106,7 +106,7 @@ class Crawler1148OutSpider(scrapy.Spider):
         create_date = time.strftime('%Y-%m-%d', time.localtime())
 
         item['case_no'] = case_no
-        item['ent_name'] = response.meta['ent_name']
+        item['entity_name'] = response.meta['ent_name']
         item['release_date'] = response.meta['release_date']
         item['release_reason'] = pun_reason
         item['release_org'] = response.meta['release_org']
@@ -115,6 +115,7 @@ class Crawler1148OutSpider(scrapy.Spider):
         item['source_url'] = response.url
         item['source_page'] = content
         item['data_id'] = 'shanxi'
+        item['spider_name'] = self.name
 
         yield item
 

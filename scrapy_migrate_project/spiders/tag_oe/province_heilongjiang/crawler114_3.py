@@ -66,10 +66,10 @@ class Crawler1143Spider(scrapy.Spider):
         op_flag = 'a'
 
         item['case_no'] = case_no
-        item['ent_name'] = ent_name
-        item['pun_reason'] = reason
-        item['pun_org'] = pun_org
-        item['pun_date'] = pun_date
+        item['entity_name'] = ent_name
+        item['punish_reason'] = reason
+        item['punish_org'] = pun_org
+        item['punish_date'] = pun_date
         item['data_id'] = data_id
         item['data_source'] = data_source
         item['del_flag'] = del_flag
@@ -77,5 +77,6 @@ class Crawler1143Spider(scrapy.Spider):
         item['create_date'] = create_date
         item['source_url'] = response.url
         item['source_page'] = content
+        item['spider_name'] = self.name
 
         yield item

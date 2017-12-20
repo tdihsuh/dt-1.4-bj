@@ -96,6 +96,7 @@ class TourismSpiderSpider(scrapy.Spider):
         item['create_date'] =create_date
         item['source_url'] = response.url
         item['source_page'] = content
+        item['spider_name'] = self.name
 
 
         yield item
