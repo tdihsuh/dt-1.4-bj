@@ -16,7 +16,7 @@ class C114a12inSpider(scrapy.Spider):
     def parse(self, response):
         r=json.loads(response.text)
         totalpage=r['page']['totalPage']
-        for page in range(1,1+totalpage):
+        for page in range(1,2):
             yield scrapy.Request(self.url.format(page),
                                  dont_filter=True,
                                  callback=self.parseJson)

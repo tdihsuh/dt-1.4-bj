@@ -81,7 +81,7 @@ class crawler007(scrapy.Item):
 
 class crawler114(scrapy.Item):
     case_no = scrapy.Field()
-    punish_org = scrapy.Field()
+    punish_agent = scrapy.Field()
     punish_date = scrapy.Field()
     entity_name = scrapy.Field()
     punish_reason = scrapy.Field()
@@ -97,6 +97,7 @@ class crawler114(scrapy.Item):
     release_reason = scrapy.Field()
     release_date = scrapy.Field()
     spider_name = scrapy.Field()
+    notice_id=scrapy.Field()
 
 
 class crawler114_out(scrapy.Item):

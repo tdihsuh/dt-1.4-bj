@@ -136,6 +136,8 @@ class ScrapyMigrateProjectPipeline(object):
         return item
 
     def close_spider(self, spider):
+        if spider.name == 'c008':
+            self.producer_cm.stop()
         pass
 
 
