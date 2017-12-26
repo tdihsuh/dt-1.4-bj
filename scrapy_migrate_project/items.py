@@ -236,8 +236,6 @@ class crawler114(scrapy.Item):
     source_page = scrapy.Field()
     reg_no = scrapy.Field()
     report_year = scrapy.Field()
-    release_reason = scrapy.Field()
-    release_date = scrapy.Field()
     spider_name = scrapy.Field()
     notice_id=scrapy.Field()
 
