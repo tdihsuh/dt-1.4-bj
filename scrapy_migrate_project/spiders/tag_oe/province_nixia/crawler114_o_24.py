@@ -53,6 +53,6 @@ class Nx024OutSpider(scrapy.Spider):
         item['create_date'] = time.strftime('%Y-%m-%d', time.localtime())
         item['case_no'] = response.xpath('//div[@class="tc"]/span/text()').extract_first()
         item['release_reason'] =response.xpath('//div[@class="txt_con"]/p[1]/text()').extract_first()
-
+        item['reg_no'] = ''
         yield item
 

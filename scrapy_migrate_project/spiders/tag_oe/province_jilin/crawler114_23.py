@@ -60,4 +60,6 @@ class Jl023InSpider(scrapy.Spider):
         item['data_source'] = self.name
         hashcode = hash(ent_name + pun_date)
         item['data_id'] = 'jl' + '-' + str(hashcode)
+        item['report_year'] = ''
+        item['notice_id'] = ''
         yield item

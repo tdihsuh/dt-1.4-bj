@@ -23,7 +23,7 @@ class Nx024InSpider(scrapy.Spider):
             detail_url = 'http://nx.gsxt.gov.cn' + href
             item['pun_org'] = li.xpath('./p//span/text()').extract_first()
             pun_date = li.xpath('./em/text()').extract_first()
-            item['release_date'] = pun_date
+            item['pun_date'] = pun_date
 
             hashcode = hash(ent_name + pun_date)
             item['data_id'] = 'nx' + '-' + str(hashcode)
@@ -53,10 +53,11 @@ class Nx024InSpider(scrapy.Spider):
         item['source_page'] = data
         item['create_date'] = time.strftime('%Y-%m-%d', time.localtime())
         item['case_no'] = response.xpath('//div[@class="tc"]/span/text()').extract_first()
-        item['release_reason'] = response.xpath('//div[@class="txt_con"]/p[1]/text()').extract_first()
-
+        item['pun_reason'] = response.xpath('//div[@class="txt_con"]/p[1]/text()').extract_first()
+        item['reg_no'] = ''
         item['del_flag'] = '0'
         item['op_flag'] = 'a'
-
+        item['report_year'] = ''
+        item['notice_id'] = ''
         yield item
 

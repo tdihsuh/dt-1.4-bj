@@ -55,5 +55,19 @@ class Nx013Spider(scrapy.Spider):
             item['spider_name'] = self.name
             data = response.text
             item['source_page'] = data
-
+            item['entity_name'] = ''
+            item['org_code'] = ''
+            item['reg_no'] = ''
+            item['tax_no'] = ''
+            item['identity_card'] = ''
+            item['current_status'] = ''
+            item['area_code'] = ''
+            item['offical_updtime'] = ''
+            item['note'] = ''
+            item['create_date'] = ''
+            item['update_date'] = ''
+            item['punish_type2'] = ''
+            item['entity_type'] = ''
+            item['data_source'] = ''
+            item['notice_id'] = ''
             yield item

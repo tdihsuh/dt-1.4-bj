@@ -66,4 +66,25 @@ class Xz015Spider(scrapy.Spider):
                 item['spider_name'] = self.name
                 data = response.text
                 item['source_page'] = data
+                item['notice_id'] = ''
+                item['data_source'] = ''
+                item['current_status'] = ''
+                item['area_code'] = ''
+                item['offical_updtime'] = ''
+                item['note'] = ''
+                item['create_date'] = ''
+                item['update_date'] = ''
+                item['punish_type2'] = ''
+                item['entity_type'] = ''
+                item['credit_no'] = ''
+                item['org_code'] = ''
+                item['reg_no'] = ''
+                item['tax_no'] = ''
+                item['identity_card'] = ''
+                item['legal_man'] = ''
+                item['punish_result'] = ''
+                item['punish_date'] = ''
+                item['punish_type1'] = ''
+                item['punish_reason'] = ''
+                item['law_item'] = ''
                 yield item

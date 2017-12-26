@@ -62,5 +62,20 @@ class Hz017Spider(scrapy.Spider):
                 item['spider_name'] = self.name
                 ret = response.text
                 item['source_page'] = ret
+                item['punish_type1'] = ''
+                item['credit_no'] = ''
+                item['reg_no'] = ''
+                item['tax_no'] = ''
+                item['identity_card'] = ''
+                item['legal_man'] = ''
+                item['current_status'] = ''
+                item['area_code'] = ''
+                item['offical_updtime'] = ''
+                item['note'] = ''
+                item['create_date'] = ''
+                item['update_date'] = ''
+                item['punish_type2'] = ''
+                item['entity_type'] = ''
+                item['data_source'] = ''
                 yield item
 

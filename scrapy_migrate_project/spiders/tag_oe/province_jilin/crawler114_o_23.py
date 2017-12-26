@@ -59,4 +59,5 @@ class Jl023OutSpider(scrapy.Spider):
         item['spider_name'] = self.name
         data = response.text
         item['source_page'] = data
+
         yield item

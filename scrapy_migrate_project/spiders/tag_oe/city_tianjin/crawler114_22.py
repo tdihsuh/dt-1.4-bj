@@ -41,6 +41,10 @@ class Tj022InSpider(scrapy.Spider):
             item['op_flag'] = 'a'
             item['data_id'] = 'tj' + '-' + str(hashcode)
             item['create_date'] = time.strftime('%Y-%m-%d', time.localtime())
+            item['case_no'] = ''
+            item['reg_no'] = ''
+            item['report_year'] = ''
+            item['notice_id'] = ''
             yield item
         # 翻页
         url = response.url

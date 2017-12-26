@@ -57,6 +57,8 @@ class Gx019InSpider(scrapy.Spider):
         item['op_flag'] = 'a'
         item['create_date'] = time.strftime('%Y-%m-%d', time.localtime())
         item['case_no'] = response.xpath('//h4[@class="ggwh_class"]/text()').extract_first()
-
+        item['reg_no'] = ''
+        item['report_year'] = ''
+        item['notice_id'] = ''
         yield item
 

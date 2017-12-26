@@ -54,6 +54,19 @@ class Gs016Spider(scrapy.Spider):
             item['spider_name'] = self.name
             data = response.text
             item['source_page'] = data
+            item['reg_no'] = ''
+            item['tax_no'] = ''
+            item['identity_card'] = ''
+            item['org_code'] = ''
+            item['current_status'] = ''
+            item['area_code'] = ''
+            item['offical_updtime'] = ''
+            item['note'] = ''
+            item['create_date'] = ''
+            item['update_date'] = ''
+            item['punish_type2'] = ''
+            item['entity_type'] = ''
+            item['data_source'] = ''
             yield item
 
     def parsePerson(self, response):
@@ -79,6 +92,20 @@ class Gs016Spider(scrapy.Spider):
             item['spider_name'] = self.name
             data = response.text
             item['source_page'] = data
+            item['reg_no'] = ''
+            item['tax_no'] = ''
+            item['legal_man'] = ''
+            item['credit_no'] = ''
+            item['org_code'] = ''
+            item['current_status'] = ''
+            item['area_code'] = ''
+            item['offical_updtime'] = ''
+            item['note'] = ''
+            item['create_date'] = ''
+            item['update_date'] = ''
+            item['punish_type2'] = ''
+            item['entity_type'] = ''
+            item['data_source'] = ''
             yield item
 
 

@@ -57,4 +57,6 @@ class Xj020OutSpider(scrapy.Spider):
         item['release_reason'] = response.xpath('//div[@class="box"]/div/p[2]/text()').extract_first().replace(u'\xa0', u' ')
         item['data_source'] = self.name
         item['create_date'] = time.strftime('%Y-%m-%d', time.localtime())
+        item['case_no'] = ''
+        item['reg_no'] = ''
         yield item

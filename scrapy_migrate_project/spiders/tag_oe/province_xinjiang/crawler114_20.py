@@ -59,4 +59,8 @@ class Xj020InSpider(scrapy.Spider):
         item['del_flag'] = '0'
         item['op_flag'] = 'a'
         item['create_date'] = time.strftime('%Y-%m-%d', time.localtime())
+        item['case_no'] = ''
+        item['reg_no'] = ''
+        item['report_year'] = ''
+        item['notice_id'] = ''
         yield item
