@@ -5,7 +5,7 @@ from scrapy_migrate_project.items import crawler116
 from bs4 import BeautifulSoup
 import requests
 import re
-
+import time
 class C116a09Spider(scrapy.Spider):
     name = 'c116a09'
     allowed_domains = ['www.creditjx.gov.cn']
@@ -49,6 +49,18 @@ class C116a09Spider(scrapy.Spider):
             data=r['list']
             for each in data:
                 item=crawler116()
+                item['credit_no'] =each['creditCode']
+                item['reg_no'] = ''
+                item['identity_card'] =each['idCard']
+                item['current_status'] = ''
+                item['area_code'] = each['areaCode']
+                item['offical_updtime'] = each['uploadTime']
+                item['note'] = ''
+                item['create_date'] = time.strftime('%Y-%m-%d', time.localtime())
+                item['update_date'] = ''
+                item['punish_type2'] = each['punishTypeTwo']
+                item['entity_type'] = each['organizationCode']
+                item['data_source'] = response.text
                 item['spider_name']=self.name
                 item['tax_no']=each['taxCode']
                 item['punish_date']=each['punishDate']

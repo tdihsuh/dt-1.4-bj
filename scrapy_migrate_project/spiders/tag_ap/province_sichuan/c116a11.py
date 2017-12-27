@@ -5,7 +5,7 @@ from scrapy_migrate_project.items import crawler116
 from bs4 import BeautifulSoup
 import requests
 import re
-
+import time
 class C116a11Spider(scrapy.Spider):
     name = 'c116a11'
     allowed_domains = ['www.cdcredit.gov.cn']
@@ -86,14 +86,28 @@ class C116a11Spider(scrapy.Spider):
             # print('====================',r)
             data=r.get('msg').get('items')
             item = response.meta['item']
+            item['case_no'] = data[1].get('value')
 
+            item['credit_no'] =data[7].get('value')
+            item['org_code'] = data[8].get('value')
+            item['reg_no'] = data[9].get('value')
+            item['tax_no'] = data[10].get('value')
+            item['identity_card'] =data[11].get('value')
 
-            # item['tax_code']=data['taxCode'].get('value')
+            item['current_status'] = data[16].get('value')
+            item['area_code'] = data[17].get('value')
+            item['offical_updtime'] = data[18].get('value')
+            item['note'] = data[19].get('value')
+            item['create_date'] = time.strftime('%Y-%m-%d', time.localtime())
+            item['update_date'] = ''
+            item['punish_type2'] = data[5].get('value')
+            item['entity_type'] = ''
+            item['data_source'] = self.name
+            item['source_url'] = ''
+
             item['punish_date']=data[14].get('value')
             item['entity_name']=data[6].get('value')
-            # item['case_no']=data['punishNumber'].get('value')
             item['punish_agent']=data[15].get('value')
-            # item['org_num']=data['orgId'].get('value')
 
             item['punish_type1'] =data[4].get('value')
             item['legal_man']=data[12].get('value')

@@ -5,7 +5,7 @@ from scrapy_migrate_project.items import crawler116
 from bs4 import BeautifulSoup
 import requests
 import re
-
+import time
 class C116a10Spider(scrapy.Spider):
     name = 'c116a10'
     allowed_domains = ['www.creditsc.gov.cn']
@@ -89,6 +89,33 @@ class C116a10Spider(scrapy.Spider):
             lis=soup.find_all('ul')[-1].find_all('li')
             # print('###########    data    ############',lis)
             item = response.meta['item']
+            # item['case_no'] = ''
+            # item['punish_type1'] = ''
+            # item['punish_reason'] = ''
+            # item['law_item'] = ''
+            # item['entity_name'] = ''
+            item['credit_no'] =lis[7].span.get_text(strip=True)
+            item['org_code'] = lis[8].span.get_text(strip=True)
+            item['reg_no'] = lis[9].span.get_text(strip=True)
+            item['tax_no'] = lis[10].span.get_text(strip=True)
+            item['identity_card'] =lis[11].span.get_text(strip=True)
+            # item['legal_man'] = ''
+            # item['punish_result'] = ''
+            # item['punish_date'] = ''
+            # item['punish_agent'] =''
+            item['current_status'] = lis[-3].span.get_text(strip=True)
+            item['area_code'] = lis[16].span.get_text(strip=True)
+            item['offical_updtime'] = ''
+            item['note'] = lis[17].span.get_text(strip=True)
+            item['create_date'] = time.strftime('%Y-%m-%d', time.localtime())
+            item['update_date'] = ''
+            item['punish_type2'] = lis[5].span.get_text(strip=True)
+            item['entity_type'] = ''
+            item['data_source'] = response.text
+            # item['source_url'] = ''
+            # item['source_page'] =response.text
+            # item['spider_name'] = ''
+            # item['notice_id']=''
             item['punish_reason'] = lis[2].span.get_text(strip=True)
             # item['noticeid'] = data['VAL_ID']
             item['punish_date'] = lis[-5].span.get_text(strip=True)

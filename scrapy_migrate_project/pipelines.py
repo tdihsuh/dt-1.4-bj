@@ -114,7 +114,7 @@ class ScrapyMigrateProjectPipeline(object):
 
         elif isinstance(item, C008Item):
             self.producer_mt.produce(str(item))
-        elif isinstance(item, (C009Item,C010Item,C012Item,crawler116)):
+        elif isinstance(item, (C009Item,C010Item,crawler116)):
             self.producer_ap.produce(str(item))
 
         elif isinstance(item, CustomsItem):
@@ -301,12 +301,24 @@ class DuplicatePipeline(object):
             else:
                 redis_db.hset(redis_data_dict, hash(item['source_url']), item['spider_name'])
         elif item['spider_name'] in ['c009','c010','c012',
-                                   'c114a09in','c114a09out','c114a12in','c114a12out',
-                                   'c114a13in','c114a13out','c114a14in','c114a14out',
-                                   'c114a15in','c114a15out','c114a16in','c114a16out',
+                                   'c114a09in','c114a12in',
+                                   'c114a13in','c114a14in',
+                                   'c114a15in','c114a16in',
                                    'c116a07','c116a09','c116a12','c116a10','c116a11']:
 
             s= item['spider_name']+item['notice_id']
+
+            if redis_db.hexists(redis_data_dict, hash(s)):
+                print('already exist!')
+                raise DropItem("Duplicate item found:%s" % item)
+            else:
+                redis_db.hset(redis_data_dict,hash(s), item['spider_name'])
+        elif item['spider_name'] in ['c114a09out','c114a12out',
+                                     'c114a13out','c114a14out',
+                                     'c114a15out','c114a16out',
+                                  ]:
+
+            s= item['spider_name']+item['data_id']
 
             if redis_db.hexists(redis_data_dict, hash(s)):
                 print('already exist!')

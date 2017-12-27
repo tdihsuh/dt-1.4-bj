@@ -5,7 +5,7 @@ from scrapy_migrate_project.items import crawler114
 from bs4 import BeautifulSoup
 # import requests
 import re
-
+import time
 class C114a14inSpider(scrapy.Spider):
     """湖南经营异常企业名录"""
     name = 'c114a14in'
@@ -62,6 +62,22 @@ class C114a14inSpider(scrapy.Spider):
         soup=BeautifulSoup(response.text,'lxml')
         if not soup.find('div',class_=re.compile(u'ip')):
             item=response.meta['item']
+            # item['case_no'] = ''
+            # item['punish_agent'] = ''
+            # item['punish_date'] = ''
+            # item['entity_name'] = ''
+            # item['punish_reason'] = ''
+            item['data_id'] = ''
+            item['data_source'] = ''
+            item['del_flag'] = ''
+            item['op_flag'] = ''
+            item['create_date'] = time.strftime('%Y-%m-%d', time.localtime())
+            # item['source_url'] = ''
+            item['source_page'] = response.text
+            item['reg_no'] = ''
+            item['report_year'] = ''
+            # item['spider_name'] = ''
+            # item['notice_id'] = ''
             item['punish_reason']=soup.find_all('div',class_='jjyc_word')[0].get_text(strip=True).replace(' ','').replace('\t','').replace('\n','').replace('\r','')
             item['case_no']=soup.find_all('div',class_='jjyc_word')[0].p.get_text(strip=True)
             yield item
@@ -110,8 +126,8 @@ class C114a14outSpider(scrapy.Spider):
                 item['release_date']=each['date']
                 item['entity_name']=each['etpName']
                 item['source_url']='http://hn.gsxt.gov.cn/notice/search/announce_detail?uuid={}&category=01&categorySub=02'.format(each['link'])
-                item['punish_agent']=each['orgName']
-                item['notice_id']=each['link']
+                item['release_org']=each['orgName']
+                item['data_id']=each['link']
                 item['spider_name']=item['data_source']=self.name
                 yield scrapy.Request(item['source_url'],
                                      meta={'item': item},
@@ -125,6 +141,18 @@ class C114a14outSpider(scrapy.Spider):
         soup=BeautifulSoup(response.text,'lxml')
         if not soup.find('div',class_=re.compile(u'ip')):
             item=response.meta['item']
+            # item['case_no'] = ''
+            # item['release_org'] = ''
+            # item['release_date'] = ''
+            # item['entity_name'] = ''
+            # item['release_reason'] = ''
+            # item['data_id'] = ''
+            # item['data_source'] = self.name
+            item['create_date'] = time.strftime('%Y-%m-%d', time.localtime())
+            # item['source_url'] = ''
+            # item['source_page'] = ''
+            item['reg_no'] = ''
+            # item['spider_name'] = ''
             item['source_page']=response.text
             item['release_reason']=soup.find_all('div',class_='jjyc_word')[0].get_text(strip=True).replace(' ','').replace('\t','').replace('\n','').replace('\r','')
             item['case_no']=soup.find_all('div',class_='jjyc_word')[0].p.get_text(strip=True)
