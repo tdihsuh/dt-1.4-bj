@@ -6,6 +6,7 @@ from bs4 import BeautifulSoup
 import scrapy
 from scrapy_migrate_project.items import Crawler018Item
 from selenium import webdriver
+from cycredit.SysConfig import SysConfig as sysconfig
 # from cycredit.SysLog import SysLog as logger
 # from cycredit.RedisUtil import RedisUtil as
 
@@ -43,7 +44,7 @@ class JzhXingzhengSpider(scrapy.Spider):
                                   meta={'item': item}
                                   )
         # 翻页
-        driver = webdriver.Chrome('C:\Python27\selenium\webdriver\chromedriver_win32\chromedriver.exe')
+        driver = webdriver.PhantomJS(executable_path=sysconfig.get_field('phantomjs', 'path'))
         driver.get(response.url)
         time.sleep(3)
 

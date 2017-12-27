@@ -4,6 +4,9 @@ import scrapy
 import time
 from selenium import webdriver
 from scrapy_migrate_project.items import Crawler017Item
+from cycredit.SysConfig import SysConfig as sysconfig
+from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
+
 
 class YjfjXingzhengSpider(scrapy.Spider):
     name = 'crawler017_3'
@@ -29,7 +32,8 @@ class YjfjXingzhengSpider(scrapy.Spider):
 
         # 翻页
         url = response.url
-        driver2 = webdriver.Chrome('C:\Python27\selenium\webdriver\chromedriver_win32\chromedriver.exe')
+        driver2 = webdriver.PhantomJS(executable_path=sysconfig.get_field('phantomjs', 'path'),
+                                    desired_capabilities=dcap);
         driver2.get(url)
         time.sleep(3)
         # 获取总页数
@@ -56,7 +60,8 @@ class YjfjXingzhengSpider(scrapy.Spider):
         item['source_url'] = url
         item['spider_name'] = self.name
         item['source_page'] = data
-        driver = webdriver.Chrome('C:\Python27\selenium\webdriver\chromedriver_win32\chromedriver.exe')
+        driver = webdriver.PhantomJS(executable_path=sysconfig.get_field('phantomjs', 'path'),
+                                    desired_capabilities=dcap);
         driver.get(response.url)
         time.sleep(3)
 

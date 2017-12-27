@@ -4,7 +4,7 @@ import scrapy
 import time
 from selenium import webdriver
 from scrapy_migrate_project.items import Crawler017Item
-
+from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 
 class YjjXingzhengSpider(scrapy.Spider):
     name = 'crawler017_2'
@@ -37,7 +37,8 @@ class YjjXingzhengSpider(scrapy.Spider):
         # 翻页
 
         url = response.url
-        driver2 = webdriver.Chrome('C:\Python27\selenium\webdriver\chromedriver_win32\chromedriver.exe')
+        driver2 = webdriver.PhantomJS(executable_path=sysconfig.get_field('phantomjs', 'path'),
+                                    desired_capabilities=dcap);
         driver2.get(url)
         time.sleep(3)
         # 获取总页数
@@ -67,7 +68,8 @@ class YjjXingzhengSpider(scrapy.Spider):
         if item['title'].find('处罚事项目录') != -1:
             return
 
-        driver = webdriver.Chrome('C:\Python27\selenium\webdriver\chromedriver_win32\chromedriver.exe')
+        driver = webdriver.PhantomJS(executable_path=sysconfig.get_field('phantomjs', 'path'),
+                                    desired_capabilities=dcap);
         driver.get(response.url)
         time.sleep(3)
 
