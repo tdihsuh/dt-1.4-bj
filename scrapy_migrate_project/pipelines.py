@@ -20,8 +20,8 @@ import sys
 reload(sys)
 sys.setdefaultencoding('utf-8')
 
-redis_db = redis.Redis(host='10.3.10.33', port=6379, db=0, password=None)
-redis_data_dict = "scrapy_test"
+redis_db = redis.Redis(host='10.3.2.76', port=6379, db=1, password=None)
+redis_data_dict = "scrapy_project"
 # host='10.3.2.99:9092'
 
 # client = SimpleClient(host)
