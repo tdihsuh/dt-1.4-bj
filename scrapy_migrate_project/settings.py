@@ -12,8 +12,8 @@ COMMANDS_MODULE = 'scrapy_migrate_project.commands'
 
 BOT_NAME = 'scrapy_migrate_project'
 #
-# LOG_FILE="D:\\scrapylog\\crawl_all.log"
-# LOG_LEVEL = "ERROR"
+LOG_FILE="/usr/local/log/crawler_log/crawl_all.log"
+LOG_LEVEL = "ERROR"
 
 SPIDER_MODULES = ['scrapy_migrate_project.spiders']
 NEWSPIDER_MODULE = 'scrapy_migrate_project.spiders'
