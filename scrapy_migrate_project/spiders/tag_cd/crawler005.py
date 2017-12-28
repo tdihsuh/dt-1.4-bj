@@ -11,6 +11,7 @@ from scrapy_migrate_project.items import crawler005
 class Crawler005Spider(scrapy.Spider):
     name = 'crawler005'
     allowed_domains = ['www.bcpcn.com']
+
     # start_urls = ['http://www.bcpcn.com/']
 
     def start_requests(self):
@@ -30,12 +31,10 @@ class Crawler005Spider(scrapy.Spider):
         else:
             totalpages = totalitems // 15 + 1
 
-        for i in range(1,2):
+        for i in range(1, totalpages + 1):
             url = 'http://www.bcpcn.com/gfthhbanglist?&sid=141&rn=15&pn=' + str(i)
 
             yield scrapy.Request(url=url)
-
-
 
     def parse(self, response):
         html = response.body
@@ -46,10 +45,9 @@ class Crawler005Spider(scrapy.Spider):
             ppp = p[j].find_all('span')
             link1 = ppp[1].a['href']
 
-            yield scrapy.Request(url=link1,callback=self.parse_detail)
+            yield scrapy.Request(url=link1, callback=self.parse_detail)
 
-
-    def parse_detail(self,response):
+    def parse_detail(self, response):
         html = response.body
         soup = BeautifulSoup(html, "lxml")
 
@@ -150,11 +148,7 @@ class Crawler005Spider(scrapy.Spider):
         item['regAddress'] = regAddress
         item['managerRange'] = managerRange
         item['source_url'] = response.url
-        # item['source_page'] = html
+        item['source_page'] = html
         item['spider_name'] = self.name
 
         yield item
-
-
-
-
