@@ -87,23 +87,23 @@ class ScrapyMigrateProjectPipeline(object):
         topic_sb = client.topics['tag_sb']
         topic_ci = client.topics['tag_ci']
         topic_cd = client.topics['tag_cd']
-        producer_cm = topic_cm.get_producer()
-        producer_oe = topic_oe.get_producer()
-        producer_gp = topic_gp.get_producer()
-        producer_sp = topic_sp.get_producer()
-        producer_fm = topic_fm.get_producer()
-        producer_ta = topic_ta.get_producer()
-        producer_dp = topic_dp.get_producer()
-        producer_cb = topic_cb.get_producer()
-        producer_qb = topic_qb.get_producer()
-        producer_ap = topic_ap.get_producer()
-        producer_ag = topic_ag.get_producer()
-        producer_mt = topic_mt.get_producer()
-        producer_cu = topic_cu.get_producer()
-        producer_tr = topic_tr.get_producer()
-        producer_cs = topic_cs.get_producer()
-        producer_sb = topic_sb.get_producer()
-        producer_ci = topic_ci.get_producer()
+        producer_cm = topic_cm.get_sync_producer()
+        producer_oe = topic_oe.get_sync_producer()
+        producer_gp = topic_gp.get_sync_producer()
+        producer_sp = topic_sp.get_sync_producer()
+        producer_fm = topic_fm.get_sync_producer()
+        producer_ta = topic_ta.get_sync_producer()
+        producer_dp = topic_dp.get_sync_producer()
+        producer_cb = topic_cb.get_sync_producer()
+        producer_qb = topic_qb.get_sync_producer()
+        producer_ap = topic_ap.get_sync_producer()
+        producer_ag = topic_ag.get_sync_producer()
+        producer_mt = topic_mt.get_sync_producer()
+        producer_cu = topic_cu.get_sync_producer()
+        producer_tr = topic_tr.get_sync_producer()
+        producer_cs = topic_cs.get_sync_producer()
+        producer_sb = topic_sb.get_sync_producer()
+        producer_ci = topic_ci.get_sync_producer()
         producer_cd = topic_cd.get_sync_producer()
 
         list_class.append(producer_cm)
@@ -313,127 +313,127 @@ class DuplicatePipeline(object):
             if redis_db.hexists(redis_data_dict, item['source_url']):
                 print('already exist!')
                 raise DropItem("Duplicate item found:%s" % item)
-            else:
-                redis_db.hset(redis_data_dict, item['source_url'], item['spider_name'])
+            # else:
+            #     redis_db.hset(redis_data_dict, item['source_url'], item['spider_name'])
         elif item['spider_name'] == 'crawler114_7_out':
             if redis_db.hexists(redis_data_dict, item['source_url']):
                 print('already exist!')
                 raise DropItem("Duplicate item found:%s" % item)
-            else:
-                redis_db.hset(redis_data_dict, item['source_url'], item['spider_name'])
+            # else:
+            #     redis_db.hset(redis_data_dict, item['source_url'], item['spider_name'])
         elif item['spider_name'] == 'crawler114_8':
             if redis_db.hexists(redis_data_dict, hash(item['case_no'] + item['pun_date'] + item['ent_name'])):
                 print('already exist!')
                 raise DropItem("Duplicate item found:%s" % item)
-            else:
-                redis_db.hset(redis_data_dict, hash(item['case_no'] + item['pun_date'] + item['ent_name']),
-                              item['spider_name'])
+            # else:
+            #     redis_db.hset(redis_data_dict, hash(item['case_no'] + item['pun_date'] + item['ent_name']),
+            #                   item['spider_name'])
         elif item['spider_name'] == 'crawler114_8_out':
             if redis_db.hexists(redis_data_dict, hash(item['case_no'] + item['release_date'] + item['ent_name'])):
                 raise DropItem("Duplicate item found:%s" % item)
-            else:
-                redis_db.hset(redis_data_dict, hash(item['case_no'] + item['release_date'] + item['ent_name']),
-                              item['spider_name'])
+            # else:
+            #     redis_db.hset(redis_data_dict, hash(item['case_no'] + item['release_date'] + item['ent_name']),
+            #                   item['spider_name'])
 
         elif item['spider_name'] == 'crawler114_6':
             if redis_db.hexists(redis_data_dict, hash(item['case_no'] + item['pun_date'] + item['ent_name'])):
                 print('already exist!')
                 raise DropItem("Duplicate item found:%s" % item)
-            else:
-                redis_db.hset(redis_data_dict, hash(item['case_no'] + item['pun_date'] + item['ent_name']),
-                              item['spider_name'])
+            # else:
+            #     redis_db.hset(redis_data_dict, hash(item['case_no'] + item['pun_date'] + item['ent_name']),
+            #                   item['spider_name'])
 
         elif item['spider_name'] == 'crawler114_6_out':
             if redis_db.hexists(redis_data_dict, hash(item['case_no'] + item['release_date'] + item['ent_name'])):
                 raise DropItem("Duplicate item found:%s" % item)
-            else:
-                redis_db.hset(redis_data_dict, hash(item['case_no'] + item['release_date'] + item['ent_name']),
-                              item['spider_name'])
+            # else:
+            #     redis_db.hset(redis_data_dict, hash(item['case_no'] + item['release_date'] + item['ent_name']),
+            #                   item['spider_name'])
 
         elif item['spider_name'] == 'crawler114_5':
             if redis_db.hexists(redis_data_dict, hash(item['source_url'])):
                 print('already exist!')
                 raise DropItem("Duplicate item found:%s" % item)
-            else:
-                redis_db.hset(redis_data_dict, hash(item['source_url']), item['spider_name'])
+            # else:
+            #     redis_db.hset(redis_data_dict, hash(item['source_url']), item['spider_name'])
 
         elif item['spider_name'] == 'crawler114_5_out':
             if redis_db.hexists(redis_data_dict, hash(item['source_url'])):
                 print('already exist!')
                 raise DropItem("Duplicate item found:%s" % item)
-            else:
-                redis_db.hset(redis_data_dict, hash(item['source_url']), item['spider_name'])
+            # else:
+            #     redis_db.hset(redis_data_dict, hash(item['source_url']), item['spider_name'])
 
         elif item['spider_name'] == 'crawler114_1':
             if redis_db.hexists(redis_data_dict, hash(item['source_url'])):
                 print('already exist!')
                 raise DropItem("Duplicate item found:%s" % item)
-            else:
-                redis_db.hset(redis_data_dict, hash(item['source_url']), item['spider_name'])
+            # else:
+            #     redis_db.hset(redis_data_dict, hash(item['source_url']), item['spider_name'])
 
         elif item['spider_name'] == 'crawler114_3':
             if redis_db.hexists(redis_data_dict, hash(item['source_url'])):
                 print('already exist!')
                 raise DropItem("Duplicate item found:%s" % item)
-            else:
-                redis_db.hset(redis_data_dict, hash(item['source_url']), item['spider_name'])
+            # else:
+            #     redis_db.hset(redis_data_dict, hash(item['source_url']), item['spider_name'])
 
         elif item['spider_name'] == 'crawler114_3_out':
             if redis_db.hexists(redis_data_dict, hash(item['source_url'])):
                 print('already exist!')
                 raise DropItem("Duplicate item found:%s" % item)
-            else:
-                redis_db.hset(redis_data_dict, hash(item['source_url']), item['spider_name'])
+            # else:
+            #     redis_db.hset(redis_data_dict, hash(item['source_url']), item['spider_name'])
 
         elif item['spider_name'] == 'crawler116_6':
             if redis_db.hexists(redis_data_dict, hash(item['source_url'])):
                 print('already exist!')
                 raise DropItem("Duplicate item found:%s" % item)
-            else:
-                redis_db.hset(redis_data_dict, hash(item['source_url']), item['spider_name'])
+            # else:
+            #     redis_db.hset(redis_data_dict, hash(item['source_url']), item['spider_name'])
 
         elif item['spider_name'] == 'crawler116_1':
             if redis_db.hexists(redis_data_dict, hash(item['source_url'])):
                 print('already exist!')
                 raise DropItem("Duplicate item found:%s" % item)
-            else:
-                redis_db.hset(redis_data_dict, hash(item['source_url']), item['spider_name'])
+            # else:
+            #     redis_db.hset(redis_data_dict, hash(item['source_url']), item['spider_name'])
 
         elif item['spider_name'] == 'crawler116_4':
             if redis_db.hexists(redis_data_dict, hash(item['source_url'])):
                 print('already exist!')
                 raise DropItem("Duplicate item found:%s" % item)
-            else:
-                redis_db.hset(redis_data_dict, hash(item['source_url']), item['spider_name'])
+            # else:
+            #     redis_db.hset(redis_data_dict, hash(item['source_url']), item['spider_name'])
 
         elif item['spider_name'] == 'customs_spider':
             if redis_db.hexists(redis_data_dict, hash(item['org_code'] + item['copname'] + item['creditcode'])):
                 print('already exist!')
                 raise DropItem("Duplicate item found:%s" % item)
-            else:
-                redis_db.hset(redis_data_dict, hash(item['org_code'] + item['copname'] + item['creditcode']),
-                              item['spider_name'])
+            # else:
+            #     redis_db.hset(redis_data_dict, hash(item['org_code'] + item['copname'] + item['creditcode']),
+            #                   item['spider_name'])
 
         elif item['spider_name'] == 'tourism_spider':
             if redis_db.hexists(redis_data_dict, hash(item['source_url'])):
                 print('already exist!')
                 raise DropItem("Duplicate item found:%s" % item)
-            else:
-                redis_db.hset(redis_data_dict, hash(item['source_url']), item['spider_name'])
+            # else:
+            #     redis_db.hset(redis_data_dict, hash(item['source_url']), item['spider_name'])
 
         elif item['spider_name'] == 'crawler007':
             if redis_db.hexists(redis_data_dict, hash(item['entity_name']+item['punishDate']+item['orgNum'])):
                 print('already exist!')
                 raise DropItem("Duplicate item found:%s" % item)
-            else:
-                redis_db.hset(redis_data_dict,hash(item['entity_name']+item['punishDate']+item['orgNum']), item['spider_name'])
+            # else:
+            #     redis_db.hset(redis_data_dict,hash(item['entity_name']+item['punishDate']+item['orgNum']), item['spider_name'])
 
         elif item['spider_name'] == 'crawler005':
             if redis_db.hexists(redis_data_dict, hash(item['source_url'])):
                 print('already exist!')
                 raise DropItem("Duplicate item found:%s" % item)
-            else:
-                redis_db.hset(redis_data_dict, hash(item['source_url']), item['spider_name'])
+            # else:
+            #     redis_db.hset(redis_data_dict, hash(item['source_url']), item['spider_name'])
         elif item['spider_name'] in ['c009','c010','c012',
                                    'c114a09in','c114a12in',
                                    'c114a13in','c114a14in',
@@ -445,8 +445,8 @@ class DuplicatePipeline(object):
             if redis_db.hexists(redis_data_dict, hash(s)):
                 print('already exist!')
                 raise DropItem("Duplicate item found:%s" % item)
-            else:
-                redis_db.hset(redis_data_dict,hash(s), item['spider_name'])
+            # else:
+            #     redis_db.hset(redis_data_dict,hash(s), item['spider_name'])
         elif item['spider_name'] in ['c114a09out','c114a12out',
                                      'c114a13out','c114a14out',
                                      'c114a15out','c114a16out',
@@ -457,15 +457,15 @@ class DuplicatePipeline(object):
             if redis_db.hexists(redis_data_dict, hash(s)):
                 print('already exist!')
                 raise DropItem("Duplicate item found:%s" % item)
-            else:
-                redis_db.hset(redis_data_dict,hash(s), item['spider_name'])
+            # else:
+            #     redis_db.hset(redis_data_dict,hash(s), item['spider_name'])
         elif item['spider_name'] in ['c008','c011']:
             s=item['spider_name']+item['source_url']
             if redis_db.hexists(redis_data_dict, hash(s)):
                 print('already exist!')
                 raise DropItem("Duplicate item found:%s" % item)
-            else:
-                redis_db.hset(redis_data_dict,hash(s), item['spider_name'])
+            # else:
+            #     redis_db.hset(redis_data_dict,hash(s), item['spider_name'])
         elif item['spider_name'] in ['crawler013', 'crawler015_1', 'crawler015', 'crawler016_2', 'crawler016',
                                      'crawler018', 'crawler018_2', 'crawler017_2',
                                      'crawler017', 'crawler114_18', 'crawler114_o_18', 'crawler114_19',
@@ -481,25 +481,25 @@ class DuplicatePipeline(object):
             if redis_db.hexists(redis_data_dict, hash(item['data_id'])):
                 print('already exist!')
                 raise DropItem("Duplicate item found:%s" % item)
-            else:
-                redis_db.hset(redis_data_dict, hash(item['data_id']), item['spider_name'])
+            # else:
+            #     redis_db.hset(redis_data_dict, hash(item['data_id']), item['spider_name'])
         elif item['spider_name'] in ['crawler116_13', 'crawler116_15']:
             if redis_db.hexists(redis_data_dict, hash(item['case_no'])):
                 print('already exist!')
                 raise DropItem("Duplicate item found:%s" % item)
-            else:
-                redis_db.hset(redis_data_dict, hash(item['case_no']), item['spider_name'])
+            # else:
+            #     redis_db.hset(redis_data_dict, hash(item['case_no']), item['spider_name'])
         elif item['spider_name'] == 'crawler116_16':
             if redis_db.hexists(redis_data_dict, hash(item['case_no'] + item['notice_id'])):
                 print('already exist!')
                 raise DropItem("Duplicate item found:%s" % item)
-            else:
-                redis_db.hset(redis_data_dict, hash(item['case_no'] + item['notice_id']), item['spider_name'])
+            # else:
+            #     redis_db.hset(redis_data_dict, hash(item['case_no'] + item['notice_id']), item['spider_name'])
         elif item['spider_name'] == 'crawler116_17':
             if redis_db.hexists(redis_data_dict, hash(item['notice_id'])):
                 print('already exist!')
                 raise DropItem("Duplicate item found:%s" % item)
-            else:
-                redis_db.hset(redis_data_dict, hash(item['notice_id']), item['spider_name'])
+            # else:
+            #     redis_db.hset(redis_data_dict, hash(item['notice_id']), item['spider_name'])
 
         return item
