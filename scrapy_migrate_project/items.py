@@ -62,6 +62,7 @@ class crawler005(scrapy.Item):
     source_url = scrapy.Field()
     source_page = scrapy.Field()
     spider_name = scrapy.Field()
+    compName=scrapy.Field()
 
 
 class crawler007(scrapy.Item):

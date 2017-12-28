@@ -14,7 +14,7 @@ BOT_NAME = 'scrapy_migrate_project'
 SPIDER_MODULES = ['scrapy_migrate_project.spiders']
 NEWSPIDER_MODULE = 'scrapy_migrate_project.spiders'
 
-KAFKA_HOST = '10.3.2.94:9092,10.3.2.95:9092,10.3.2.96:9092'
+KAFKA_HOST = '10.3.2.97:9092,10.3.2.98:9092,10.3.2.99:9092'
 
 REDIS_HOST = ''
 REDIS_PORT = ''

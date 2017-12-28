@@ -4,7 +4,7 @@ import scrapy
 import time
 from selenium import webdriver
 from scrapy_migrate_project.items import Crawler017Item
-from cycredit.SysConfig import SysConfig as sysconfig
+# from cycredit.SysConfig import SysConfig as sysconfig
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 
 

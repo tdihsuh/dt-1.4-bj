@@ -30,7 +30,7 @@ class Crawler005Spider(scrapy.Spider):
         else:
             totalpages = totalitems // 15 + 1
 
-        for i in range(1,4):
+        for i in range(1,2):
             url = 'http://www.bcpcn.com/gfthhbanglist?&sid=141&rn=15&pn=' + str(i)
 
             yield scrapy.Request(url=url)
@@ -150,7 +150,7 @@ class Crawler005Spider(scrapy.Spider):
         item['regAddress'] = regAddress
         item['managerRange'] = managerRange
         item['source_url'] = response.url
-        item['source_page'] = html
+        # item['source_page'] = html
         item['spider_name'] = self.name
 
         yield item

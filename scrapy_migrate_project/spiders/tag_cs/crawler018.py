@@ -6,7 +6,7 @@ from bs4 import BeautifulSoup
 import scrapy
 from scrapy_migrate_project.items import Crawler018Item
 from selenium import webdriver
-from cycredit.SysConfig import SysConfig as sysconfig
+# from cycredit.SysConfig import SysConfig as sysconfig
 # from cycredit.SysLog import SysLog as logger
 # from cycredit.RedisUtil import RedisUtil as
 
