@@ -484,11 +484,11 @@ class DuplicatePipeline(object):
             else:
                 redis_db.hset(redis_data_dict, hash(item['data_id']), item['spider_name'])
         elif item['spider_name'] in ['crawler116_13', 'crawler116_15']:
-            if redis_db.hexists(redis_data_dict, hash(item['case_no'] + item['source_page'])):
+            if redis_db.hexists(redis_data_dict, hash(item['case_no'])):
                 print('already exist!')
                 raise DropItem("Duplicate item found:%s" % item)
             else:
-                redis_db.hset(redis_data_dict, hash(item['case_no'] + item['source_page']), item['spider_name'])
+                redis_db.hset(redis_data_dict, hash(item['case_no']), item['spider_name'])
         elif item['spider_name'] == 'crawler116_16':
             if redis_db.hexists(redis_data_dict, hash(item['case_no'] + item['notice_id'])):
                 print('already exist!')
