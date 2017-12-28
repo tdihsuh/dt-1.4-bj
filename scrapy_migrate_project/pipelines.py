@@ -260,6 +260,7 @@ class ScrapyMigrateProjectPipeline(object):
             s = item['spider_name'] + item['data_id']
             redis_db.hset(redis_data_dict, hash(s), item['spider_name'])
         elif item['spider_name'] in ['c008', 'c011']:
+            s=item['spider_name']+item['source_url']
             redis_db.hset(redis_data_dict, hash(s), item['spider_name'])
         elif item['spider_name'] in ['crawler013', 'crawler015_1', 'crawler015', 'crawler016_2', 'crawler016',
                                      'crawler018', 'crawler018_2', 'crawler017_2',

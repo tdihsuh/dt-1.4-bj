@@ -22,7 +22,7 @@ class CustomsSpiderSpider(scrapy.Spider):
         lista = result['responseResult']['responseData']['casePage']
         total_pages = lista['totalPages']
 
-        for i in range(1, 5):
+        for i in range(1, 1+total_pages):
             param = {'ccppListQueryRequest.manaType': 'C', 'ccppListQueryRequest.casePage.curPage': str(i),
                      'ccppListQueryRequest.casePage.pageSize': '500'}
 
@@ -42,7 +42,7 @@ class CustomsSpiderSpider(scrapy.Spider):
             org_code = each['saicSysNo']
             creditcode = each['socialCreditCode']
 
-            hashcode = hash(copname+org_code+creditcode)
+            # hashcode = hash(copname+org_code+creditcode)
 
 
             item['copname'] = copname

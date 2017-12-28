@@ -24,11 +24,12 @@ class CustomsItem(scrapy.Item):
     source_url = scrapy.Field()
     source_page = scrapy.Field()
     spider_name = scrapy.Field()
+    copname=scrapy.Field()
 
 
 class TourismItem(scrapy.Item):
     # define the fields for your item here like:
-    # name = scrapy.Field()
+    name = scrapy.Field()
     entity_name = scrapy.Field()
     legal_person = scrapy.Field()
     permit_number = scrapy.Field()
